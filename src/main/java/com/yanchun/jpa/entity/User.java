@@ -1,4 +1,4 @@
-package com.yanchun.entity;
+package com.yanchun.jpa.entity;
 
 import java.util.Date;
 
