@@ -18,6 +18,7 @@ $.fn.serializeObject = function()
 
 //获取url后的参数值
 function getUrlParam(key) {
+    debugger;
 	var href = window.location.href;
 	var url = href.split("?");
 	if(url.length <= 1){
