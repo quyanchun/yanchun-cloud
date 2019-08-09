@@ -20,6 +20,6 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public List<Menu> findByRoles(Set<Integer> roleIds) {
         List<Menu> menusByRoleIds = menuRepository.findMenusByRoleIds(roleIds);
-        return menuRepository.findMenusByRoleIds(roleIds);
+        return menusByRoleIds;
     }
 }

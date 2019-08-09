@@ -16,4 +16,5 @@ public interface MenuRepository extends JpaRepository<Menu,Integer> {
             " where "+
             " r.roleId in ?1")
     List<Menu> findMenusByRoleIds(@RequestParam Set<Integer> roleIds);
+
 }
