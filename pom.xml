@@ -17,6 +17,7 @@
     <properties>
         <spring-cloud.version>Finchley.SR2</spring-cloud.version>
         <fastjson.version>1.2.54</fastjson.version>
+        <security-oauth2.version>2.3.3.RELEASE</security-oauth2.version>
     </properties>
 
     <dependencies>
@@ -136,6 +137,17 @@
             <version>2.9.2</version>
         </dependency>
 
+        <!-- security -->
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>${security-oauth2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
 
     </dependencies>
 

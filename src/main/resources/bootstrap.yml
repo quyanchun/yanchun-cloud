@@ -42,17 +42,17 @@ spring:
 #    port: 5672
 #    username: myrabbitmq
 #    password: abcd1234
-#  redis:
-#    host: my.redis.com
-#    port: 6379
-#    password: zqslR4ujggmpDjrZ
-#    timeout: 10s
-#    lettuce:
-#      pool:
-#        min-idle: 0
-#        max-idle: 8
-#        max-active: 8
-#        max-wait: -1ms
+  redis:
+    host: 106.13.79.58
+    port: 6379
+    password: 123456
+    timeout: 10s
+    lettuce:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: -1ms
 #eureka:
 #  client:
 #    serviceUrl:
