@@ -1,7 +1,7 @@
 package com.yanchun.service.impl;
 
 import com.yanchun.jpa.entity.Menu;
-import com.yanchun.jpa.repository.MenuRepository;
+import com.yanchun.jpa.dao.MenuRepository;
 import com.yanchun.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

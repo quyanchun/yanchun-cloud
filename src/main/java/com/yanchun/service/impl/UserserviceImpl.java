@@ -1,7 +1,7 @@
 package com.yanchun.service.impl;
 
 import com.yanchun.jpa.entity.Passport;
-import com.yanchun.jpa.repository.PassportRepository;
+import com.yanchun.jpa.dao.PassportRepository;
 import com.yanchun.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

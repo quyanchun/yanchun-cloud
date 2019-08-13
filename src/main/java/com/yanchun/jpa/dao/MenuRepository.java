@@ -1,4 +1,4 @@
-package com.yanchun.jpa.repository;
+package com.yanchun.jpa.dao;
 
 import com.yanchun.jpa.entity.Menu;
 import org.springframework.data.jpa.repository.JpaRepository;
