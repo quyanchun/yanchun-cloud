@@ -11,12 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.util.OAuth2Utils;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.security.oauth2.provider.OAuth2Request;
+import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +40,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "user/login",method = RequestMethod.POST)
-    public ResponseEntity<CommonResult> login(@RequestBody LoginFormBean loginFormBean){
+    public ResponseEntity<CommonResult> login(@RequestBody LoginFormBean loginFormBean, Principal principal){
         CommonResult commonResult = new CommonResult();
         try {
 //            Passport passportByPhone = userService.getPassportByPhone(loginFormBean.getUserName());
@@ -52,6 +54,15 @@ public class UserController {
             parameters.put("username", loginFormBean.getUserName());
             parameters.put("password", loginFormBean.getPassWord());
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication != null) {
+                if (authentication instanceof OAuth2Authentication) {
+                    OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) authentication.getDetails();
+                    String access_token = details.getTokenValue();
+                    System.out.println(access_token);
+                }
+            }
+            ResponseEntity<OAuth2AccessToken> oAuth2AccessTokenResponseEntity = oauth2Client.postAccessToken(authentication, parameters);
+            commonResult.setResult(oAuth2AccessTokenResponseEntity);
             return ResponseEntity.ok(commonResult);
         }catch (Exception e){
             _LOG.error("=====login失败：",e);

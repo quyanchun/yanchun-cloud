@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.oauth2.common.exceptions.InvalidClientException;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -44,6 +45,8 @@ public class RedisClientDetailsService extends JdbcClientDetailsService {
         ClientDetails clientDetails = null;
 
         // 先从redis获取
+        BoundHashOperations<String, Object, Object> stringObjectObjectBoundHashOperations = stringRedisTemplate.boundHashOps(CACHE_CLIENT_KEY);
+        Object o = stringObjectObjectBoundHashOperations.get(clientId);
         String value = (String) stringRedisTemplate.boundHashOps(CACHE_CLIENT_KEY).get(clientId);
         if (StringUtils.isBlank(value)) {
             clientDetails = cacheAndGetClient(clientId);

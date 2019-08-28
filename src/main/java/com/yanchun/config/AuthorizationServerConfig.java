@@ -97,14 +97,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 return accessToken;
             });
 
-//            TokenEnhancer tokenEnhancer = new TokenEnhancer() {
-//                @Override
-//                public OAuth2AccessToken enhance(OAuth2AccessToken oAuth2AccessToken, OAuth2Authentication oAuth2Authentication) {
-//                    addLoginUserInfo(oAuth2AccessToken, oAuth2Authentication);
-//                    return oAuth2AccessToken;
-//                }
-//            };
-//            endpoints.tokenEnhancer(tokenEnhancer);
+            TokenEnhancer tokenEnhancer = new TokenEnhancer() {
+                @Override
+                public OAuth2AccessToken enhance(OAuth2AccessToken oAuth2AccessToken, OAuth2Authentication oAuth2Authentication) {
+                    addLoginUserInfo(oAuth2AccessToken, oAuth2Authentication);
+                    return oAuth2AccessToken;
+                }
+            };
+            endpoints.tokenEnhancer(tokenEnhancer);
         }
     }
 
