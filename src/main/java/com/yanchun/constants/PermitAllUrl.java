@@ -14,7 +14,7 @@ public final class PermitAllUrl {
     /**
      * 监控中心和swagger需要访问的url
      */
-    private static final String[] ENDPOINTS = {"/oauth/**","/back/img/**","/back/login-sms.html","/back/login.html","/back/css/**","/back/js/**","/login","/user/login","/actuator/health", "/actuator/env", "/actuator/metrics/**", "/actuator/trace", "/actuator/dump",
+    private static final String[] ENDPOINTS = {"/oauth/authorize","/back/img/**","/back/login-sms.html","/back/login.html","/back/css/**","/back/js/**","/login","/user/login","/actuator/health", "/actuator/env", "/actuator/metrics/**", "/actuator/trace", "/actuator/dump",
             "/actuator/jolokia", "/actuator/info", "/actuator/logfile", "/actuator/refresh", "/actuator/flyway", "/actuator/liquibase",
             "/actuator/heapdump", "/actuator/loggers", "/actuator/auditevents", "/actuator/env/PID", "/actuator/jolokia/**",
             "/v2/api-docs/**", "/swagger-ui.html", "/swagger-resources/**", "/webjars/**"};

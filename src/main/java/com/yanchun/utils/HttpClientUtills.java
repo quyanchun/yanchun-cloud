@@ -13,8 +13,10 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.misc.BASE64Encoder;
 
 import java.io.IOException;
+import java.util.Base64;
 
 public class HttpClientUtills {  
     private static Logger logger = LoggerFactory
@@ -84,7 +86,10 @@ public class HttpClientUtills {
         // post请求返回结果  
         CloseableHttpClient httpClient = HttpClients.createDefault();  
         String res = "";
-        HttpPost httpPost = new HttpPost(url);  
+        HttpPost httpPost = new HttpPost(url);
+        BASE64Encoder encoder = new BASE64Encoder();
+        String data = encoder.encode("system".getBytes());
+        httpPost.setHeader("Authorization","Basic "+ data);
         // 设置请求和传输超时时间  
         RequestConfig requestConfig = RequestConfig.custom()  
                 .setSocketTimeout(200000).setConnectTimeout(200000).build();  

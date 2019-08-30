@@ -36,6 +36,7 @@ public class Oauth2ClientImpl implements Oauth2Client {
     public Map<String, Object> postAccessToken(Map<String, String> parameters) {
         String param = JSON.toJSONString(parameters);
         String s = HttpClientUtills.httpPost("http://localhost:10002/oauth/token", param);
+//        JSONObject jsonObject = HttpClientUtills.httpGet("http://localhost:10002/oauth/token");
         return null;
     }
 
