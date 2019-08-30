@@ -4,6 +4,7 @@ import com.yanchun.formBean.LoginFormBean;
 import com.yanchun.jpa.entity.Passport;
 import com.yanchun.service.UserService;
 import com.yanchun.token.model.SystemClientInfo;
+import com.yanchun.token.service.Oauth2Client;
 import com.yanchun.utils.CommonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private TokenEndpoint oauth2Client;
+    private Oauth2Client oauth2Client;
     /**
      * login
      * @param loginFormBean
@@ -61,8 +62,8 @@ public class UserController {
                     System.out.println(access_token);
                 }
             }
-            ResponseEntity<OAuth2AccessToken> oAuth2AccessTokenResponseEntity = oauth2Client.postAccessToken(authentication, parameters);
-            commonResult.setResult(oAuth2AccessTokenResponseEntity);
+            Map<String, Object> map = oauth2Client.postAccessToken(parameters);
+            commonResult.setResult(map);
             return ResponseEntity.ok(commonResult);
         }catch (Exception e){
             _LOG.error("=====login失败：",e);

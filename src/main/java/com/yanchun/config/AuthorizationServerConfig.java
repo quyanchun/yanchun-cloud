@@ -139,11 +139,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.allowFormAuthenticationForClients(); // 允许表单形式的认证
+        security.tokenKeyAccess("permitAll()")
+                .checkTokenAccess("isAuthenticated()")
+                .allowFormAuthenticationForClients(); // 允许表单形式的认证
     }
-
-//    @Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * 我们将client信息存储到oauth_client_details表里<br>
@@ -154,11 +153,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-//		clients.inMemory().withClient("system").secret(bCryptPasswordEncoder.encode("system"))
-//				.authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("app")
-//				.accessTokenValiditySeconds(3600);
-
-//		clients.jdbc(dataSource);
         // 2018.06.06，这里优化一下，详细看下redisClientDetailsService这个实现类
         clients.withClientDetails(redisClientDetailsService);
         redisClientDetailsService.loadAllClientToCache();
