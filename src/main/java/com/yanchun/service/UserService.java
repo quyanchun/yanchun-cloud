@@ -1,6 +1,7 @@
 package com.yanchun.service;
 
 import com.yanchun.jpa.entity.Passport;
+import com.yanchun.token.model.LoginAppUser;
 
 public interface UserService {
     /**
@@ -10,4 +11,11 @@ public interface UserService {
      * @throws Exception
      */
     Passport getPassportByPhone(String phone)throws Exception;
+
+    /**
+     * 查询登录用户
+     * @param username
+     * @return
+     */
+    LoginAppUser findByUsername(String username);
 }

@@ -35,7 +35,10 @@ public class HttpClientUtills {
         // post请求返回结果  
         CloseableHttpClient httpClient = HttpClients.createDefault();  
         JSONObject jsonResult = null;
-        HttpPost httpPost = new HttpPost(url);  
+        HttpPost httpPost = new HttpPost(url);
+        BASE64Encoder encoder = new BASE64Encoder();
+        String data = encoder.encode("system:system".getBytes());
+        httpPost.setHeader("Authorization","Basic "+ data);
         // 设置请求和传输超时时间  
         RequestConfig requestConfig = RequestConfig.custom()  
                 .setSocketTimeout(2000).setConnectTimeout(2000).build();  
@@ -46,7 +49,7 @@ public class HttpClientUtills {
                 StringEntity entity = new StringEntity(jsonParam.toString(),  
                         "utf-8");  
                 entity.setContentEncoding("UTF-8");  
-                entity.setContentType("application/json");  
+                entity.setContentType("application/x-www-form-urlencoded");
                 httpPost.setEntity(entity);  
             }  
             CloseableHttpResponse result = httpClient.execute(httpPost);  
@@ -88,7 +91,7 @@ public class HttpClientUtills {
         String res = "";
         HttpPost httpPost = new HttpPost(url);
         BASE64Encoder encoder = new BASE64Encoder();
-        String data = encoder.encode("system".getBytes());
+        String data = encoder.encode("system:system".getBytes());
         httpPost.setHeader("Authorization","Basic "+ data);
         // 设置请求和传输超时时间  
         RequestConfig requestConfig = RequestConfig.custom()  
@@ -98,10 +101,10 @@ public class HttpClientUtills {
             if (null != strParam) {  
                 // 解决中文乱码问题  
                 StringEntity entity = new StringEntity(strParam,"utf-8");  
-                entity.setContentEncoding("UTF-8");  
-                entity.setContentType("application/json");  
-                httpPost.setEntity(entity);  
-            }  
+                entity.setContentEncoding("UTF-8");
+                entity.setContentType("application/x-www-form-urlencoded");
+                httpPost.setEntity(entity);
+            }
             CloseableHttpResponse result = httpClient.execute(httpPost);  
             //请求发送成功，并得到响应  
             if (result.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {  

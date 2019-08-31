@@ -16,7 +16,7 @@ public class DefaultView extends WebMvcConfigurerAdapter {
 
     @Override
     public void addViewControllers(ViewControllerRegistry reg) {
-        reg.addViewController("/").setViewName("redirect:http://106.13.79.58");//默认访问页面
+        reg.addViewController("/").setViewName("redirect:http://http://www.gushishop.top/");//默认访问页面
         reg.setOrder(Ordered.HIGHEST_PRECEDENCE);//最先执行过滤
         super.addViewControllers(reg);
     }

@@ -41,7 +41,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	private static class OAuth2RequestedMatcher implements RequestMatcher {
 		@Override
 		public boolean matches(HttpServletRequest request) {
-			System.out.println("OAuth2RequestedMatcher："+"走到这里了");
 			// 请求参数中包含access_token参数
 			if (request.getParameter(OAuth2AccessToken.ACCESS_TOKEN) != null) {
 				return true;

@@ -8,7 +8,6 @@ import java.util.Date;
 @Data
 public class AppUser implements Serializable {
 
-	private static final long serialVersionUID = 611197991672067628L;
 
 	private Long id;
 	private String username;

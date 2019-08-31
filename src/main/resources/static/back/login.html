@@ -18,7 +18,7 @@
 			<input id="username" name="username" placeholder="用户名" type="text" value="15040046912"
 				autocomplete="off">
 			<hr class="hr15">
-			<input id="password" name="password" placeholder="密码" type="password" value="111"
+			<input id="password" name="password" placeholder="密码" type="password" value="admin"
 				autocomplete="off">
 			<hr class="hr15">
 			<button style="width: 100%;" type="submit"
@@ -80,12 +80,15 @@
 				// 	localStorage.setItem("refresh_token", data.refresh_token);
 				// 	location.href = 'index.html';
 				// },
-                success: function (result) {
-                    console.log("data is :" + result)
-                    if (result.code == 1000) {
+                success: function (data) {
+                    if (data.code == 1000) {
+                        localStorage.removeItem("access_token");
+                        localStorage.removeItem("refresh_token");
+                        localStorage.setItem("access_token", data.result.access_token);
+						localStorage.setItem("refresh_token", data.result.refresh_token);
                         location.href = '../back/index.html';
                     }else {
-                        alert(result.message)
+                        alert(data.message)
                     }
                 },
 				error : function(xhr, textStatus, errorThrown) {

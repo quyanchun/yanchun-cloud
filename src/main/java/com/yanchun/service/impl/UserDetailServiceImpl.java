@@ -1,9 +1,13 @@
 package com.yanchun.service.impl;
 
+import com.yanchun.constants.CredentialType;
+import com.yanchun.service.UserService;
 import com.yanchun.token.model.LoginAppUser;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,7 +26,8 @@ import org.springframework.stereotype.Service;
 @Service("userDetailsService")
 public class UserDetailServiceImpl implements UserDetailsService {
 
-
+    @Autowired
+    private UserService userService;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -33,24 +38,23 @@ public class UserDetailServiceImpl implements UserDetailsService {
         String[] params = username.split("\\|");
         username = params[0];// 真正的用户名
 
-//        LoginAppUser loginAppUser = userClient.findByUsername(username);
-//        if (loginAppUser == null) {
-//            throw new AuthenticationCredentialsNotFoundException("用户不存在");
-//        } else if (!loginAppUser.isEnabled()) {
-//            throw new DisabledException("用户已作废");
-//        }
-//
-//        if (params.length > 1) {
-//            // 登录类型
-//            CredentialType credentialType = CredentialType.valueOf(params[1]);
-//            if (CredentialType.PHONE == credentialType) {// 短信登录
-//                handlerPhoneSmsLogin(loginAppUser, params);
-//            } else if (CredentialType.WECHAT_OPENID == credentialType) {// 微信登陆
-//                handlerWechatLogin(loginAppUser, params);
-//            }
-//        }
-        System.out.println("执行到loadUserByUsername");
-        return new LoginAppUser();
+        LoginAppUser loginAppUser = userService.findByUsername(username);
+        if (loginAppUser == null) {
+            throw new AuthenticationCredentialsNotFoundException("用户不存在");
+        } else if (!loginAppUser.isEnabled()) {
+            throw new DisabledException("用户已作废");
+        }
+
+        if (params.length > 1) {
+            // 登录类型
+            CredentialType credentialType = CredentialType.valueOf(params[1]);
+            if (CredentialType.PHONE == credentialType) {// 短信登录
+                handlerPhoneSmsLogin(loginAppUser, params);
+            } else if (CredentialType.WECHAT_OPENID == credentialType) {// 微信登陆
+                handlerWechatLogin(loginAppUser, params);
+            }
+        }
+        return loginAppUser;
     }
 
     private void handlerWechatLogin(LoginAppUser loginAppUser, String[] params) {

@@ -1,5 +1,7 @@
 package com.yanchun.controller.api;
 
+import com.alibaba.fastjson.JSONObject;
+import com.yanchun.constants.CredentialType;
 import com.yanchun.formBean.LoginFormBean;
 import com.yanchun.jpa.entity.Passport;
 import com.yanchun.service.UserService;
@@ -34,6 +36,8 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    private TokenEndpoint tokenEndpoint;
+    @Autowired
     private Oauth2Client oauth2Client;
     /**
      * login
@@ -52,7 +56,7 @@ public class UserController {
             parameters.put(OAuth2Utils.CLIENT_ID, SystemClientInfo.CLIENT_ID);
             parameters.put("client_secret", SystemClientInfo.CLIENT_SECRET);
             parameters.put(OAuth2Utils.SCOPE, SystemClientInfo.CLIENT_SCOPE);
-            parameters.put("username", loginFormBean.getUserName());
+            parameters.put("username", loginFormBean.getUserName() + "|" + CredentialType.USERNAME.name());
             parameters.put("password", loginFormBean.getPassWord());
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             if (authentication != null) {
@@ -62,7 +66,7 @@ public class UserController {
                     System.out.println(access_token);
                 }
             }
-            Map<String, Object> map = oauth2Client.postAccessToken(parameters);
+            JSONObject map = oauth2Client.postAccessToken(parameters);
             commonResult.setResult(map);
             return ResponseEntity.ok(commonResult);
         }catch (Exception e){

@@ -12,6 +12,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -139,9 +140,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticated()")
-                .allowFormAuthenticationForClients(); // 允许表单形式的认证
+        security.allowFormAuthenticationForClients(); // 允许表单形式的认证
     }
 
     /**

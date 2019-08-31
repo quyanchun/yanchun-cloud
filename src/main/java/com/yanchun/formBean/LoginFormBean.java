@@ -9,5 +9,5 @@ import lombok.Data;
 @Data
 public class LoginFormBean {
     private String userName;
-    private String passWord;
+        private String passWord;
 }

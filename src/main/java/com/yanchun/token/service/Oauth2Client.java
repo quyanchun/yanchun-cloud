@@ -1,5 +1,6 @@
 package com.yanchun.token.service;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +18,7 @@ public interface Oauth2Client {
      * @return
      * @see org.springframework.security.oauth2.provider.endpoint.TokenEndpoint
      */
-    Map<String, Object> postAccessToken(@RequestParam Map<String, String> parameters);
+    JSONObject postAccessToken(Map<String, String> parameters);
 
     /**
      * 删除access_token和refresh_token<br>
@@ -25,6 +26,6 @@ public interface Oauth2Client {
      *
      * @param access_token
      */
-    void removeToken(@RequestParam("access_token") String access_token);
+    void removeToken(String access_token);
 
 }

@@ -24,7 +24,7 @@ public class Passport {
     private Timestamp createTime;
     private Timestamp lastTime;
     private Integer loginTimes;
-    private Byte status;
+    private int status;
 
     @Id
     @Column(name = "id")
@@ -138,11 +138,11 @@ public class Passport {
 
     @Basic
     @Column(name = "status")
-    public Byte getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
