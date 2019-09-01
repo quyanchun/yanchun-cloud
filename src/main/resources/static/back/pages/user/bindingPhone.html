@@ -70,7 +70,7 @@
 	function initData(){
 		$.ajax({
 			type : 'get',
-			url : domainName + '/api-u/users/current',
+			url : domainName + '/user/current',
 			async : false,
 			success : function(data) {
 				$("#id").val(data.id);

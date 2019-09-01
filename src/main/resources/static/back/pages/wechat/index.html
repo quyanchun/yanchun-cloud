@@ -60,7 +60,7 @@
     function showUserInfo(access_token) {
         $.ajax({
             type: 'get',
-            url: domainName + '/api-u/users/current?access_token=' + access_token,
+            url: domainName + '/user/current?access_token=' + access_token,
             success: function (data) {
                 $("#hello").text("微信登陆成功，欢迎：" + data.nickname);
                 var url = data.headImgUrl;

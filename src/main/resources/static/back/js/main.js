@@ -72,7 +72,7 @@ showLoginInfo();
 function showLoginInfo(){
 	$.ajax({
 		type : 'get',
-		url : domainName + '/api-u/users/current',
+		url : domainName + '/user/current',
 		async : false,
 		success : function(data) {
 			$(".admin-header-user span").text(data.nickname);

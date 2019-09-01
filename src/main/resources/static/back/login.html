@@ -43,7 +43,7 @@
 	if (access_token != null && access_token.trim().length != 0) {
 		$.ajax({
 			type : 'get',
-			url : domainName + '/api-u/users/current?access_token=' + access_token,
+			url : domainName + '/user/current?access_token=' + access_token,
 			success : function(data) {
 				location.href = '../back/index.html';
 			},
@@ -66,7 +66,7 @@
 		} else {
 			$.ajax({
 				type : 'post',
-				url : domainName + '/user/login',
+				url : domainName + '/sys/login',
                 contentType: "application/json",
 				timeout : 5000, //超时时间设置，单位毫秒
 				// data : $("#login-form").serialize(),

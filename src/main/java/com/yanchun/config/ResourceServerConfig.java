@@ -32,6 +32,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		http.requestMatcher(new OAuth2RequestedMatcher()).authorizeRequests()
 				.antMatchers(PermitAllUrl.permitAllUrl()).permitAll() // 放开权限的url
 				.anyRequest().authenticated();
+		http.headers().frameOptions().sameOrigin();
 	}
 
 	/**

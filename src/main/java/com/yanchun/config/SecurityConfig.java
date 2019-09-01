@@ -68,6 +68,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(PermitAllUrl.permitAllUrl()).permitAll() // 放开权限的url
 				.anyRequest().authenticated().and()
 				.httpBasic().and().csrf().disable();
+		//解决 in a frame because it set 'X-Frame-Options' to 'deny'. 问题
+		http.headers().frameOptions().sameOrigin();
 	}
 
     

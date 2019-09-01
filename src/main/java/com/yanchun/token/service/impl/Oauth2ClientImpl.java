@@ -6,7 +6,9 @@ import com.yanchun.token.service.Oauth2Client;
 import com.yanchun.utils.HttpClientUtills;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.Set;
@@ -18,7 +20,8 @@ import java.util.Set;
 @Service
 public class Oauth2ClientImpl implements Oauth2Client {
     private Logger _LOG = LoggerFactory.getLogger(this.getClass());
-
+    @Autowired
+    private ConsumerTokenServices tokenServices;
     @Override
     public JSONObject postAccessToken(Map<String, String> parameters) {
         String s = this.mapToString(parameters);
@@ -29,7 +32,7 @@ public class Oauth2ClientImpl implements Oauth2Client {
 
     @Override
     public void removeToken(String access_token) {
-
+        boolean b = tokenServices.revokeToken(access_token);
     }
 
     private String mapToString(Map<String, String> parameters){
